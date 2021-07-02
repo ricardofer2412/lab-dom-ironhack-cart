@@ -4,18 +4,12 @@ function updateSubtotal(product) {
   console.log('Calculating subtotal, yey!');
 
   const price = product.querySelector('.price span').innerText;
-  console.log(price)
-  const quantity = product.getElementsByTagName('input')[0].value
-  console.log(quantity)
 
-  let subTotalValue =  price * quantity
+  const quantity = product.getElementsByTagName('input')[0].value;
 
- 
-  console.log(subTotalValue)
-  const initSubtotal = product.querySelector('.subtotal span').innerText
+  const subTotalValue = price * quantity;
 
-  initSubtotal.textContent = '$1000'
-  console.log('Init', initSubtotal)
+  document.querySelector('.subtotal span').innerHTML = subTotalValue;
 }
 
 function calculateAll() {
@@ -23,13 +17,27 @@ function calculateAll() {
   // it runs when only iteration 1 is completed. at later point, it canx be removed.
   const singleProduct = document.querySelector('.product');
   updateSubtotal(singleProduct);
-  // end of test
 
-  // ITERATION 2
-  //... your code goes here
+  const productList = document.querySelectorAll('tr.product');
+  console.log(productList);
+  for (let i = 0; i < productList.length; i++) {
+    const price = productList[i].querySelector('.price span').innerText;
+    console.log(price);
+    const quantity = productList[i].getElementsByTagName('input')[0].value;
 
-  // ITERATION 3
-  //... your code goes here
+    const subTotalValue = price * quantity;
+
+    productList[i].querySelector('.subtotal span').innerHTML = subTotalValue;
+  }
+  let sum = 0;
+  for (let index = 0; index < productList.length; index++) {
+    let subtotal = Number(
+      productList[index].querySelector('.subtotal span').innerText
+    );
+    sum = subtotal + sum;
+  }
+  console.log(sum);
+  document.querySelector('#total-value span').innerHTML = sum;
 }
 
 // ITERATION 4
